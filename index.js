@@ -11,7 +11,7 @@ function calc() {
   let resultNum;
   let operator;
 
-  // функция удобного поиска элемента
+  // simple element search
   function easyToSearch(element) {
     if (element.charAt(0) === "#") {
       return document.querySelector(element);
@@ -20,7 +20,7 @@ function calc() {
     return document.querySelectorAll(element);
   }
 
-  // функция назначения операторов
+  // setting operators
   function setOps() {
     if (!operator) {
       oldNum = num;
@@ -28,22 +28,26 @@ function calc() {
       operator = this.value;
     }
   }
+  // setting operators for keyboard
+  function setOpsOnKeyboard(val) {
 
   for (let i = 0; i < ops.length; i++) {
     ops[i].onclick = setOps;
   }
 
-  // функция отображения цифр на дисплее
+  // displaying numbers
   function setNums() {
     num += this.value;
     display.value = num;
   }
 
+  // displaying numbers for keyboard
+  function setNumsOnKeyboard(val) {
   for (let i = 0; i < nums.length; i++) {
     nums[i].onclick = setNums;
   }
 
-  // функция полного очищения дисплея
+  // clearing the display
   function onClearButton() {
     display.value = "";
     oldNum = "";
@@ -51,7 +55,7 @@ function calc() {
   }
   clearButton.addEventListener("click", onClearButton);
 
-  // функция удаления последней цифры на дисплее
+  // removing the last char
   function onRemoveButton() {
     display.value = display.value.slice(0, -1);
     oldNum = display.value;
@@ -59,7 +63,7 @@ function calc() {
   }
   removeButton.addEventListener("click", onRemoveButton);
 
-  // блокировка ввода больше одной точки
+  // blocking entry >1 dot
   function blockDot() {
     if (display.value.includes(".")) {
       dot.value = "";
@@ -70,7 +74,7 @@ function calc() {
   const dot = document.querySelector(".dot");
   dot.addEventListener("click", blockDot);
 
-  // логика операций на дисплее
+  // the calculations are displayed
   function displayNum() {
     oldNum = parseFloat(oldNum);
     num = parseFloat(num);
@@ -106,6 +110,8 @@ function calc() {
     operator = null;
   }
 
+  // support for keyboard
+  document.addEventListener("keydown", function (e) {
   equal.addEventListener("click", displayNum);
 }
 
