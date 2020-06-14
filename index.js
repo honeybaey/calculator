@@ -59,9 +59,16 @@ function calc() {
   }
   removeButton.addEventListener("click", onRemoveButton);
 
-  // if (display.value.includes(".")) {
-  //   console.log("Много точек");
-  // }
+  // блокировка ввода больше одной точки
+  function blockDot() {
+    if (display.value.includes(".")) {
+      dot.value = "";
+    } else {
+      dot.value = ".";
+    }
+  }
+  const dot = document.querySelector(".dot");
+  dot.addEventListener("click", blockDot);
 
   // логика операций на дисплее
   function displayNum() {
@@ -91,10 +98,6 @@ function calc() {
 
     if (!isFinite(resultNum)) {
       resultNum = "Ошибка";
-    }
-
-    if (!display.value.includes(".")) {
-      console.log("Много точек");
     }
 
     display.value = parseFloat(resultNum.toFixed(2));
