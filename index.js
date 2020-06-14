@@ -30,6 +30,12 @@ function calc() {
   }
   // setting operators for keyboard
   function setOpsOnKeyboard(val) {
+    if (!operator) {
+      oldNum = num;
+      num = "";
+      operator = val;
+    }
+  }
 
   for (let i = 0; i < ops.length; i++) {
     ops[i].onclick = setOps;
@@ -43,6 +49,10 @@ function calc() {
 
   // displaying numbers for keyboard
   function setNumsOnKeyboard(val) {
+    num += val;
+    display.value = num;
+  }
+
   for (let i = 0; i < nums.length; i++) {
     nums[i].onclick = setNums;
   }
@@ -52,6 +62,7 @@ function calc() {
     display.value = "";
     oldNum = "";
     num = "";
+    dot.value = ".";
   }
   clearButton.addEventListener("click", onClearButton);
 
